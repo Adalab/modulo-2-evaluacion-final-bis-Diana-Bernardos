@@ -12,4 +12,16 @@
     margin-right: 30px;
     margin-top: 50px;
 }
+.photo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-right: 150px;
+    text-align: center;
 
+}
+
+.ulList{
+    list-style: none;
+}
