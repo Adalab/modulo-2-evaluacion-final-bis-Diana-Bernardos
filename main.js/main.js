@@ -16,26 +16,47 @@ function renderList(userList) {
 ul.innerHTML= "";
 
  for (const user of userList){
-    const isFavorite= bestFriend && bestFriend.includes(user);
-    const liCLass = isFavorite ? "favorite": " ";
-
-    ul.innerHTML +=
-`<li class="card">
+    const userColors =user.Color ? getUserColors(user.Colors):"";
+    const isFavorite=  bestFriend.findIndex(user=>userList.id===userList.id);
+    /* const liCLass = isFavorite === -1 ?  " ":"pink"; */
+ul.innerHTML +=
+`<li class="ulList" ${isFavorite}" id= ${user.id}">
 <img src="${user.picture.thumbnail}"/> <h2>"${user.name.first}"</h2><h4>"${user.location.city}"</h4><h5>"${user.login.username}"</h5>
-</li>
-<li class="favorite" id="${userList.indexOf(user)}" onclick="addFriends(event)">Favorite</li></div>
-<li class="div" id="${userList.indexOf(user)}" onclick="addFriends(event)">div</li></div>`;
+${userColors}
+</li>`;
+/* let userColors="";
+if(user.Color){
+    if(user.Color&& Array.isArray(user.color)){
+ */
+function getUserColors(colors){
+    let userColorshtml="";
+for(const color of colors){
+    userColors+=`<li class = "addFriend"
+    style="background-color:#${color}"></li>
+    <li class = "isuser"
+    style="background-color:#${color}"></li>`;
 }
+return userColorshtml;
+}}};
 
- };
+function getDataAPI() {
+    fetch('https://randomuser.me/api/?results=10')
+    .then(response => response.json())
+    .then(data => {
+      userList=data.results;
+      renderList(userList);
+    })};
+/* document.addEventListener("DOMContentLoaded", getDataAPI); */
+
+
 
 //funcion que agrega o elimina usuarios de la lista de amigos
 const addFriends= (ev)=>{
-    const userId=parseInt(ev.currentTarget.id);
-   /*  const liClikedId= ev.currentTarget.id; */
-    const clikedUser= userList[userId];
+    const userId=ev.currentTarget.id;
+  const liClikedId= ev.currentTarget.id;
+    const clikedUser= userList.find(user=>user.id===userId);
     //verifica si el usuario ya esta en la lista de ffav
- const friendIndex = bestFriend && bestFriend.indexOf(clikedUser);
+ const friendIndex = bestFriend.findIndex(user=>userList.id===userList.id);
     
     //-1d si no se encuentra en fav
 if (friendIndex=== -1){
@@ -49,24 +70,25 @@ if (friendIndex=== -1){
     ev.currentTarget.classList.remove("favorite");
     // si esta lo elimina
 }
+renderBestFriend(bestFriend);
 // renderiza xa ver los cambios 
 
-localStorage.setItem("userList", JSON.stringify(bestFriend));
+localStorage.setItem("bestFriend", JSON.stringify(bestFriend));
 /* renderList(userList);  */
 //se guardan los datos en el local storage
 };
 
 const recoverSaveUsers=()=>{
-    const storeFriends=  JSON.parse(localStorage.getItem  ("bestFriend"));
+    const storeFriends= JSON.parse(localStorage.getItem("bestFriend"));
     
     if (storeFriends){
         bestFriend=storeFriends
-        renderList(storeFriends);
+        renderList(userList);
     }else 
     console.log("no hay datos");
 };
 //funcion que obtiene los datos de la api y los guarda en una variable
-function getDataAPI() {
+/* function getDataAPI() {
     fetch('https://randomuser.me/api/?results=10')
     .then(response => response.json())
     .then(data => {
@@ -75,7 +97,7 @@ function getDataAPI() {
     });
 
 
-};
+}; */
 
 //dentro de la funcion manejadora tb aañadimos los diez primeros ususarios de la lista al hacer click en save 
 const renderBestFriend= (array)=>{
@@ -96,17 +118,19 @@ function handleClick(event){
     const btnCliked=event.currentTarget;
 
     if (btnCliked.classList.contains("js_btn-save")){
-          getDataAPI();
+        getDataAPI();
         /* fetch('https://randomuser.me/api/?results=10')
        .then(response => response.json())
         .then(data => {
             //agrega los 10 primeros usuarios a la lista
             userList=data.results;
-            renderList(userList);
-            localStorage.setItem("userList", JSON.stringify(userList)); */
+            renderList(userList); */
+            localStorage.setItem("userList", JSON.stringify(userList));
             //guarda los datos en el local storage
+        
         }else if (btnCliked.classList.contains ("js_btn-recover")){
             recoverSaveUsers();
+        }
 
         /* const btnCliked=event.currentTarget;
 
@@ -116,22 +140,21 @@ function handleClick(event){
             console.log("no hay nada en el local storage");
            } */
          } ;
-         getDataAPI();
+        document.addEventListener("DOMContentLoaded", getDataAPI);
 
 ul.addEventListener("click",(event)=>{
-    if (event.target.classList.contains("favorite")){
+    if (event.target.classList.contains("ulList")){
         addFriends(event);
     }
 });
 
-};
      
     
 
 // renderiza la lista con los 10 usuarios aleatorios
-   
- getDataAPI(); 
+ 
+getDataAPI()
 
-
+ul.addEventListener("click", addFriends);
 btnsave.addEventListener("click",handleClick);
 btnrecover.addEventListener("click", handleClick);

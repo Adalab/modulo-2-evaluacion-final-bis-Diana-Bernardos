@@ -6,21 +6,19 @@
 
 .main{
     display: flex;
-    column-gap: 30px;
-    list-style: none;
-  
-
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  margin-top: 50px;
 }
-    
-.list1{
+.addFriend{
     background-color: pink;
-
 }
-.list2{
-    background-color: aquamarine;
-
+.isUser{
+    background-color: rgb(67, 172, 232);
+}
     
-}
+
 
 
 
