@@ -14,6 +14,7 @@
 }
 .userItem {
    
+    
     width:600px;
     padding: 50px;
     margin: 5px;
@@ -29,11 +30,14 @@ img{
 .userItem.selected {
  
   background-color: ffc0cb; 
+   
+    background-color: pink; 
 }
 
 .userItem:not(.selected) {
    
     background-color: rgb(148, 201, 241); 
+    background-color: rgb(148, 201, 241);
 }
 .header{
     display: flex;
