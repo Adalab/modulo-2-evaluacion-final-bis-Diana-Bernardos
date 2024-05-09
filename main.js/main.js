@@ -12,32 +12,36 @@ let bestFriend=[];
 //funcion que renderiza el listado de los datos de la api.pintando una  cadena html con los datos que queremos obtener de cada usuario al azar 
 
 
-function renderList(userList) {
+function renderList(user){
+    console.log(userList) 
 ul.innerHTML= "";
 
  for (const user of userList){
     const userColors =user.Color ? getUserColors(user.Colors):"";
     const isFavorite=  bestFriend.findIndex(user=>userList.id===userList.id);
-    /* const liCLass = isFavorite === -1 ?  " ":"pink"; */
+    const liCLass = isFavorite === -1 ?  " ":"pink"; 
 ul.innerHTML +=
 `<li class="ulList" ${isFavorite}" id= ${user.id}">
 <img src="${user.picture.thumbnail}"/> <h2>"${user.name.first}"</h2><h4>"${user.location.city}"</h4><h5>"${user.login.username}"</h5>
 ${userColors}
 </li>`;
-/* let userColors="";
-if(user.Color){
-    if(user.Color&& Array.isArray(user.color)){
- */
+if (isFavorite === -1){
+    div.classList.add("pink");
+}else{
+    div.classList.remove("pink");
+}}
+
+
 function getUserColors(colors){
-    let userColorshtml="";
-for(const color of colors){
-    userColors+=`<li class = "addFriend"
+    let userColorsHtml="";
+for(const color of userColorsHtml){
+    ulList+=`<li class = "addFriend"
     style="background-color:#${color}"></li>
     <li class = "isuser"
     style="background-color:#${color}"></li>`;
-}
-return userColorshtml;
-}}};
+}}
+return getUserColors();
+};
 
 function getDataAPI() {
     fetch('https://randomuser.me/api/?results=10')
@@ -45,6 +49,7 @@ function getDataAPI() {
     .then(data => {
       userList=data.results;
       renderList(userList);
+      localStorage.setItem("userList", JSON.stringify(userList));
     })};
 /* document.addEventListener("DOMContentLoaded", getDataAPI); */
 
@@ -102,7 +107,7 @@ const recoverSaveUsers=()=>{
 //dentro de la funcion manejadora tb aañadimos los diez primeros ususarios de la lista al hacer click en save 
 const renderBestFriend= (array)=>{
     ul.innerHTML="";
-    for (const eachUser of array){
+    for (const BestFriendLi of array){
         ul.innerHTML += renderList(userList);
     }
     const BestFriendLi= document.querySelectorAll(".js-save");
@@ -118,6 +123,7 @@ function handleClick(event){
     const btnCliked=event.currentTarget;
 
     if (btnCliked.classList.contains("js_btn-save")){
+
         getDataAPI();
         /* fetch('https://randomuser.me/api/?results=10')
        .then(response => response.json())
@@ -130,17 +136,15 @@ function handleClick(event){
         
         }else if (btnCliked.classList.contains ("js_btn-recover")){
             recoverSaveUsers();
-        }
+        } 
+        const storeFriends= bestFriend= JSON.parse(localStorage.getItem  ("bestFriend"));
 
-        /* const btnCliked=event.currentTarget;
-
-        }else if(btnCliked.classList.contains ("js_btn-recover")){
-            const storeFriends= bestFriend= JSON.parse(localStorage.getItem  ("bestFriend"));
-            renderList(storeFriends);
+    };
+            renderList(userList);
             console.log("no hay nada en el local storage");
-           } */
-         } ;
-        document.addEventListener("DOMContentLoaded", getDataAPI);
+
+        
+       
 
 ul.addEventListener("click",(event)=>{
     if (event.target.classList.contains("ulList")){
