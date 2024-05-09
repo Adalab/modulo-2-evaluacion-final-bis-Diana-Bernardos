@@ -28,7 +28,7 @@ img{
 
 .userItem.selected {
  
-  background-color: ffc0cb; 
+  background-color: pink; 
 }
 
 .userItem:not(.selected) {
