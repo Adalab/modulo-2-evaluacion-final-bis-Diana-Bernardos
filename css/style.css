@@ -13,7 +13,7 @@
     text-align: center;
 }
 .userItem {
-    /* Estilos comunes para todos los elementos de la lista */
+   
     width:600px;
     padding: 50px;
     margin: 5px;
@@ -27,13 +27,13 @@ img{
 }
 
 .userItem.selected {
-    /* Estilos cuando un usuario es amigo */
-    background-color: pink; /* Fondo rosa si es amigo */
+ 
+  background-color: ffc0cb; 
 }
 
 .userItem:not(.selected) {
-    /* Estilos cuando un usuario no es amigo */
-    background-color: rgb(148, 201, 241); /* Fondo azul si no es amigo */
+   
+    background-color: rgb(148, 201, 241); 
 }
 .header{
     display: flex;
@@ -75,13 +75,3 @@ img{
     list-style: none;
 
 }
-
-
-
-
-
-
-
-
-    
-  
