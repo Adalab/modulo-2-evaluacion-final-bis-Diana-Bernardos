@@ -11,7 +11,6 @@ let bestFriend=[];
 
 //funcion que renderiza el listado de los datos de la api.pintando una  cadena html con los datos que queremos obtener de cada usuario al azar 
 
-
 function renderList (users){
 
 
@@ -20,40 +19,25 @@ ul.innerHTML= "";
 
  for (const user of users){
     if (user.picture && user.picture.thumbnail) {
-    
-    const isSelect= bestFriend.some(friend=>friend.id===user.id); 
-    console.log(isSelect);
-    const liCLass = isSelect ? "selected" :  " "; 
+        const isFriend = user.isFriend === true; 
+        const isSelect= bestFriend.some(friend=>friend.id===user.id); 
+        console.log(isSelect);
+        const liCLass = isSelect ? "selected" :  " "; 
+        const backgroundColor = isFriend ? "pink" : "blue";
+        console.log(backgroundColor);
 
-   ul.innerHTML +=
-   `<li class="userItem ${liCLass}" id= "${user.login.uuid}">
-    <img src="${user.picture.thumbnail}"> <h2>${user.name.first}</h2><h4>${user.location.city}</h4><h5>${user.login.username}</h5>
-      </li>`;
+      ul.innerHTML +=
+       `<li class="userItem ${liCLass}" id= "${user.login.uuid}" style="${backgroundColor}">
+        <img src="${user.picture.thumbnail}"> <h1>${user.name.first}</h1><h4>${user.location.city}</h4><h5>${user.login.username}</h5>
+         </li>`;
 
-/* if (isFavorite === -1){
-    div.classList.add("pink");
-}else{
-    div.classList.remove("pink");
-}}}; */
+
  }}
- const liList =document.querySelectorAll(".userItem");
- for (const li of liList){
+      const liList =document.querySelectorAll(".userItem");
+    for (const li of liList){
     li.addEventListener("click", toggleFriend);
 }
 };
-
-/* function getUserColors(colors){
-    let userColorsHtml="";
-for(const color of colors){
-    userColorsHtml+=
-    `<li class = "addFriend"
-    style="background-color:#${color}"></li>
-    <li class = "isuser"
-    style="background-color:#${color}"></li>`;
-}
-return userColorsHtml;
-
-}; */
 
 function getDataAPI() {
     fetch('https://randomuser.me/api/?results=10')
@@ -77,32 +61,32 @@ const toggleFriend= (ev)=>{
     if (!clikedUser)return;
     
     //verifica si el usuario ya esta en la lista de ffav
- const friendIndex = bestFriend.findIndex(friend=>friend.id===clikedUser.id);
- console.log(friendIndex);
+    const friendIndex = bestFriend.findIndex(friend=>friend.id===clikedUser.id);
+     console.log(friendIndex);
     
     //-1d si no se encuentra en fav
-if (friendIndex=== -1){
+   if (friendIndex=== -1){
     bestFriend.push(clikedUser);
     // si no esta lo añade
     
     // añado la clase para que cambie el color de fondo
     ev.currentTarget.classList.add("selected");
-}else{
+   }else{
     bestFriend.splice(friendIndex,1);
     ev.currentTarget.classList.remove("selected");
     // si esta lo elimina
-}
-localStorage.setItem("bestFriend", JSON.stringify(bestFriend));
+   }
+     localStorage.setItem("bestFriend", JSON.stringify(bestFriend));
 };
 // renderiza xa ver los cambios 
 
-const saveDisplayUsers = () =>{
+     const saveDisplayUsers = () =>{
     localStorage.setItem("displayedUsers", JSON.stringify(userList));
 };
 
 
 
-const recoverDiplaySaveUsers = () => {
+    const recoverDiplaySaveUsers = () => {
     const storedFriends = JSON.parse(localStorage.getItem("bestFriend"));
     if (storedFriends) {
         bestFriend = storedFriends;
@@ -122,7 +106,7 @@ const recoverDiplaySaveUsers = () => {
 
 
     
-function handleClick(event) {
+    function handleClick(event) {
     event.preventDefault();
     const btnClicked = event.currentTarget;
 
@@ -134,10 +118,7 @@ function handleClick(event) {
     console.log(btnClicked);
 };
             
-   document.addEventListener("DOMContentLoaded",getDataAPI ) ;
-
-
-/*  li.addEventListener("click", toggleFriend); */
+document.addEventListener("DOMContentLoaded",getDataAPI ) ;
 btnsave.addEventListener("click",handleClick);
 btnrecover.addEventListener("click", handleClick);
 

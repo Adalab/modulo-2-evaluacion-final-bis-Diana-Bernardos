@@ -9,15 +9,73 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  margin-top: 50px;
+    margin-top: 50px;
+    text-align: center;
 }
-.addFriend{
-    background-color: pink;
+.userItem {
+    /* Estilos comunes para todos los elementos de la lista */
+    width:600px;
+    padding: 50px;
+    margin: 5px;
+    border-radius: 8px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color:rgb(73, 66, 66)
 }
-.isUser{
-    background-color: rgb(67, 172, 232);
+img{
+    width: 150px;
+    height: 150px;
 }
-    
+
+.userItem.selected {
+    /* Estilos cuando un usuario es amigo */
+    background-color: pink; /* Fondo rosa si es amigo */
+}
+
+.userItem:not(.selected) {
+    /* Estilos cuando un usuario no es amigo */
+    background-color: rgb(148, 201, 241); /* Fondo azul si no es amigo */
+}
+.header{
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color:rgb(73, 66, 66);
+  font-size: 40px;
+
+}
+.list1{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 50px;
+    gap: 20px;
+    margin-right: 50px;
+
+}
+.js_btn-save{
+    width:160px;
+    padding: 10px;
+    background-color:rgb(148, 201, 241); 
+    border-radius: 12px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color:rgb(73, 66, 66)
+}
+.js_btn-recover{
+    width:160px;
+    padding: 10px;
+    background-color:rgb(148, 201, 241); 
+    border-radius: 12px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color:rgb(73, 66, 66)
+
+}
+.ulList{
+    list-style: none;
+
+}
+
 
 
 
