@@ -26,17 +26,16 @@ ul.innerHTML= "";
         const backgroundColor = isFriend ? "pink" : "blue";
         console.log(backgroundColor);
 
-      ul.innerHTML +=
+    ul.innerHTML +=
        `<li class="userItem ${liCLass}" id= "${user.login.uuid}" style="${backgroundColor}">
         <img src="${user.picture.thumbnail}"> <h1>${user.name.first}</h1><h4>${user.location.city}</h4><h5>${user.login.username}</h5>
          </li>`;
-
-
- }}
-      const liList =document.querySelectorAll(".userItem");
-    for (const li of liList){
-    li.addEventListener("click", toggleFriend);
-}
+        }
+     }
+    const liList =document.querySelectorAll(".userItem");
+         for (const li of liList){
+           li.addEventListener("click", toggleFriend);
+    }
 };
 
 function getDataAPI() {
@@ -48,16 +47,18 @@ function getDataAPI() {
       renderList(userList);
 
       localStorage.setItem("userList", JSON.stringify(userList));
-    })};
+    })
+};
 
 //funcion que agrega o elimina usuarios de la lista de amigos
 const toggleFriend= (ev)=>{
+
     console.log(ev.currentTarget);
-    
     const userId=ev.currentTarget.id;
-  /* const liClikedId= ev.currentTarget.id; */
+
     const clikedUser= userList.find(user=>user.login.uuid===userId);
     console.log(userId);
+
     if (!clikedUser)return;
     
     //verifica si el usuario ya esta en la lista de ffav
@@ -65,10 +66,9 @@ const toggleFriend= (ev)=>{
      console.log(friendIndex);
     
     //-1d si no se encuentra en fav
-   if (friendIndex=== -1){
+    if (friendIndex=== -1){
     bestFriend.push(clikedUser);
     // si no esta lo añade
-    
     // añado la clase para que cambie el color de fondo
     ev.currentTarget.classList.add("selected");
    }else{
@@ -77,16 +77,14 @@ const toggleFriend= (ev)=>{
     // si esta lo elimina
    }
      localStorage.setItem("bestFriend", JSON.stringify(bestFriend));
-};
-// renderiza xa ver los cambios 
+  };
+const saveDisplayUsers = () =>{
 
-     const saveDisplayUsers = () =>{
     localStorage.setItem("displayedUsers", JSON.stringify(userList));
-};
+    };
 
 
-
-    const recoverDiplaySaveUsers = () => {
+const recoverDiplaySaveUsers = () => {
     const storedFriends = JSON.parse(localStorage.getItem("bestFriend"));
     if (storedFriends) {
         bestFriend = storedFriends;
@@ -102,11 +100,9 @@ const toggleFriend= (ev)=>{
     } else {
         console.log("No hay usuarios guardados en el almacenamiento local.");
     }
-};
+ };
 
-
-    
-    function handleClick(event) {
+function handleClick(event) {
     event.preventDefault();
     const btnClicked = event.currentTarget;
 
@@ -116,7 +112,7 @@ const toggleFriend= (ev)=>{
         recoverDiplaySaveUsers();
     }
     console.log(btnClicked);
-};
+  };
             
 document.addEventListener("DOMContentLoaded",getDataAPI ) ;
 btnsave.addEventListener("click",handleClick);
