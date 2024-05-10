@@ -19,24 +19,48 @@ ul.innerHTML= "";
 
  for (const user of users){
     if (user.picture && user.picture.thumbnail) {
-        const isFriend = user.isFriend === true; 
-        const isSelect= bestFriend.some(friend=>friend.id===user.id); 
-        console.log(isSelect);
-        const liCLass = isSelect ? "selected" :  " "; 
-        const backgroundColor = isFriend ? "pink" : "blue";
-        console.log(backgroundColor);
+        let isFriend = false;
+        let liClass = "";
+        let backgroundColor = "blue";
+
+        /* let isSelect = false;
+        for (const friend of bestFriend) {
+            if (friend.id === user.id) {
+                isSelect = true;
+                break;
+            } */
+        for (const friend of bestFriend) {
+            if (friend.id === user.login.uuid) {
+                isFriend = true;
+                liClass = "selected";
+                backgroundColor = "pink";
+                break; // Salir del bucle si el usuario es amigo
+            }
+        };
+       /*  }
+        let liClass = " ";
+            if (isSelect) {
+                liClass = "selected";
+            }
+
+        let backgroundColor = "blue";
+            if (isFriend) {
+                backgroundColor = "pink";
+            } */
 
       ul.innerHTML +=
-       `<li class="userItem ${liCLass}" id= "${user.login.uuid}" style="${backgroundColor}">
+       `<li class="userItem ${liClass}" id= "${user.login.uuid}" style="${backgroundColor}">
         <img src="${user.picture.thumbnail}"> <h1>${user.name.first}</h1><h4>${user.location.city}</h4><h5>${user.login.username}</h5>
          </li>`;
 
-
- }}
+        }
+    }
+    //funcion que se ejecuta cuando se hace click en algun usuario
       const liList =document.querySelectorAll(".userItem");
     for (const li of liList){
-    li.addEventListener("click", toggleFriend);
-}
+       li.addEventListener("click", toggleFriend);
+    }
+
 };
 
 function getDataAPI() {
@@ -56,13 +80,28 @@ const toggleFriend= (ev)=>{
     
     const userId=ev.currentTarget.id;
   /* const liClikedId= ev.currentTarget.id; */
-    const clikedUser= userList.find(user=>user.login.uuid===userId);
-    console.log(userId);
+    const clikedUser= userList.find(item=>item.id.value===clikedUser);
+    
     if (!clikedUser)return;
+
+    let isFriend = false;
+    for (const friend of bestFriend) {
+        if (friend.id === clikedUser.id) {
+            isFriend = true;
+            break;
+        }
+    }
+    let friendIndex = -1;
+    for (let i = 0; i < bestFriend.length; i++) {
+        if (bestFriend[i].id === clikedUser.id) {
+            friendIndex = i;
+            break;
+        }
+    }
     
     //verifica si el usuario ya esta en la lista de ffav
-    const friendIndex = bestFriend.findIndex(friend=>friend.id===clikedUser.id);
-     console.log(friendIndex);
+    /* const friendIndex = bestFriend.findIndex(friend=>friend.id===clikedUser.id);
+     console.log(friendIndex); */
     
     //-1d si no se encuentra en fav
    if (friendIndex=== -1){
