@@ -17,51 +17,36 @@ function renderList (users){
 
 ul.innerHTML= "";
 
- for (const user of users){
+for (const user of users){
     if (user.picture && user.picture.thumbnail) {
         let isFriend = false;
         let liClass = "";
         let backgroundColor = "blue";
 
-        /* let isSelect = false;
         for (const friend of bestFriend) {
             if (friend.id === user.id) {
-                isSelect = true;
-                break;
-            } */
-        for (const friend of bestFriend) {
-            if (friend.id === user.login.uuid) {
                 isFriend = true;
                 liClass = "selected";
                 backgroundColor = "pink";
                 break; // Salir del bucle si el usuario es amigo
             }
-        };
-       /*  }
-        let liClass = " ";
-            if (isSelect) {
-                liClass = "selected";
-            }
+        }
 
-        let backgroundColor = "blue";
-            if (isFriend) {
-                backgroundColor = "pink";
-            } */
-
-      ul.innerHTML +=
-       `<li class="userItem ${liClass}" id= "${user.login.uuid}" style="${backgroundColor}">
+        div.innerHTML +=
+        `<li class="userItem ${liClass}" id= "${user.login.uuid}" style="${backgroundColor}">
         <img src="${user.picture.thumbnail}"> <h1>${user.name.first}</h1><h4>${user.location.city}</h4><h5>${user.login.username}</h5>
          </li>`;
-
-        }
     }
+   
+}
+};
     //funcion que se ejecuta cuando se hace click en algun usuario
       const liList =document.querySelectorAll(".userItem");
     for (const li of liList){
        li.addEventListener("click", toggleFriend);
-    }
+    };
 
-};
+
 
 function getDataAPI() {
     fetch('https://randomuser.me/api/?results=10')
@@ -73,6 +58,7 @@ function getDataAPI() {
 
       localStorage.setItem("userList", JSON.stringify(userList));
     })};
+    getDataAPI();
 
 //funcion que agrega o elimina usuarios de la lista de amigos
 const toggleFriend= (ev)=>{
@@ -80,7 +66,7 @@ const toggleFriend= (ev)=>{
     
     const userId=ev.currentTarget.id;
   /* const liClikedId= ev.currentTarget.id; */
-    const clikedUser= userList.find(item=>item.id.value===clikedUser);
+    const clikedUser= userList.find(user=>user.login.uui===userId);
     
     if (!clikedUser)return;
 
@@ -129,7 +115,7 @@ const toggleFriend= (ev)=>{
     const storedFriends = JSON.parse(localStorage.getItem("bestFriend"));
     if (storedFriends) {
         bestFriend = storedFriends;
-        renderList(bestFriend);
+       /*  renderList(bestFriend); */
     } else {
         console.log("No hay usuarios guardados en el almacenamiento local.");
     }
@@ -137,11 +123,28 @@ const toggleFriend= (ev)=>{
     const storedUsers = JSON.parse(localStorage.getItem("displayedUsers"));
     if (storedUsers) {
         userList = storedUsers;
-        renderList(userList);
+  /*       renderList(userList); */
     } else {
         console.log("No hay usuarios guardados en el almacenamiento local.");
     }
-};
+    renderList(userList);
+
+     for (const friend of bestFriend) {
+        renderFriend(friend);
+
+}
+    console.log(bestFriend);
+
+function renderFriend(friend) {
+    ul.innerHTML+=
+    `<li class="userItem selected" id="${friend.login.uuid}" style="background-color: pink">
+            <img src="${friend.picture.thumbnail}">
+            <h1>${friend.name.first}</h1>
+            <h4>${friend.location.city}</h4>
+            <h5>${friend.login.username}</h5>
+         </li>`;
+}
+    };
 
 
     
