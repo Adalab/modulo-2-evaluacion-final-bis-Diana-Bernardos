@@ -16,7 +16,10 @@ function renderList (users){
 
 
 ul.innerHTML= "";
+ 
 
+
+// cambiar some por findindex y revisar local store index -1 tiene q estar rosa , ver paletas
  for (const user of users){
     if (user.picture && user.picture.thumbnail) {
         const isFriend = user.isFriend === true; 
@@ -27,7 +30,7 @@ ul.innerHTML= "";
         console.log(backgroundColor);
 
     ul.innerHTML +=
-       `<li class="userItem ${liCLass}" id= "${user.login.uuid}" style="${backgroundColor}">
+       `<li class="userItem ${liCLass}" id= "${user.login.uuid}" style="${backgroundColor}" selected>
         <img src="${user.picture.thumbnail}"> <h1>${user.name.first}</h1><h4>${user.location.city}</h4><h5>${user.login.username}</h5>
          </li>`;
         }
@@ -45,8 +48,8 @@ function getDataAPI() {
       userList=data.results;
       console.log(userList);
       renderList(userList);
-
-      localStorage.setItem("userList", JSON.stringify(userList));
+/* 
+      localStorage.setItem("userList", JSON.stringify(userList)); */
     })
 };
 
@@ -76,7 +79,7 @@ const toggleFriend= (ev)=>{
     ev.currentTarget.classList.remove("selected");
     // si esta lo elimina
    }
-     localStorage.setItem("bestFriend", JSON.stringify(bestFriend));
+     localStorage.setItem("displayedUsers", JSON.stringify(userList));
   };
 const saveDisplayUsers = () =>{
 
