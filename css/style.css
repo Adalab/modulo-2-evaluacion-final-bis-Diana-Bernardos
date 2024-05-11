@@ -27,14 +27,16 @@ img{
     height: 150px;
 }
 
-.userItem.selected {
- 
-  background-color: ffc0cb; 
-   
-    background-color: pink; 
+.userItem{
+    background-color: pink;
 }
+ 
+  
+   
+    
 
-.userItem:not(.selected) {
+
+.user-li:not(.selected) {
    
     background-color: rgb(148, 201, 241); 
     background-color: rgb(148, 201, 241);
