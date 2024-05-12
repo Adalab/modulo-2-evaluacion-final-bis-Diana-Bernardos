@@ -47,7 +47,7 @@ function getDataAPI() {
     .then(data => {
         userList = data.results;
         renderList(userList);
-        localStorage.setItem("userList", JSON.stringify(userList));
+        /* localStorage.setItem("userList", JSON.stringify(userList)); */
     });
 }
 
@@ -66,6 +66,9 @@ const toggleFriend = (ev) => {
         bestFriend.splice(friendIndex, 1);
         ev.currentTarget.classList.remove("selected");
     }
+   /*  for (const friend of bestFriend) {
+        console.log(friend.name.first);
+    } */
 
     renderList(userList);
     localStorage.setItem("bestFriend", JSON.stringify(bestFriend));
@@ -103,7 +106,7 @@ function handleClick(event) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", getDataAPI);
+getDataAPI();
 btnsave.addEventListener("click", handleClick);
 btnrecover.addEventListener("click", handleClick);
 
