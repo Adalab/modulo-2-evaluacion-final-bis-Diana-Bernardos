@@ -12,7 +12,7 @@ function renderList(users) {
     ul.innerHTML = "";
 
     for (const user of users) {
-        if (user.picture && user.picture.thumbnail) {
+        if (user.picture && user.picture.large) {
             let isSelect = false;
             for (const friend of bestFriend) {
                 if (friend.login.uuid === user.login.uuid) {
@@ -21,11 +21,13 @@ function renderList(users) {
                 }
             }
             const liClass = isSelect ? "selected" : "";
-            const backgroundColor = isSelect ? "pink" : "blue";
+            const backgroundColor = isSelect ? "pink" : "rgb(148, 201, 241)"
+   
+            
 
             ul.innerHTML +=
                 `<li class="userItem ${liClass}" id="${user.login.uuid}" style="background-color: ${backgroundColor}">
-                    <img src="${user.picture.thumbnail}">
+                    <img src="${user.picture.large}">
                     <h1>${user.name.first}</h1>
                     <h4>${user.location.city}</h4>
                     <h5>${user.login.username}</h5>

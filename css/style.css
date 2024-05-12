@@ -13,8 +13,7 @@
     text-align: center;
 }
 .userItem {
-   
-    
+
     width:600px;
     padding: 50px;
     margin: 5px;
@@ -25,30 +24,22 @@
 img{
     width: 150px;
     height: 150px;
+
 }
 
 .userItem{
     background-color: pink;
-}
- 
-  
-   
-    
 
-
-.user-li:not(.selected) {
-   
-    background-color: rgb(148, 201, 241); 
-    background-color: rgb(148, 201, 241);
 }
+
 .header{
-    display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 100px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color:rgb(73, 66, 66);
-  font-size: 40px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 100px;
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   color:rgb(73, 66, 66);
+   font-size: 40px;
 
 }
 .list1{
