@@ -37,7 +37,7 @@ function renderList(users) {
 
     const liList = document.querySelectorAll(".userItem");
     for (const li of liList) {
-        li.addEventListener("click", toggleFriend);
+        li.addEventListener("click", addFriend);
     }
 }
 
@@ -51,7 +51,7 @@ function getDataAPI() {
     });
 }
 
-const toggleFriend = (ev) => {
+const addFriend = (ev) => {
     const userId = ev.currentTarget.id;
     const clickedUser = userList.find(user => user.login.uuid === userId);
 
