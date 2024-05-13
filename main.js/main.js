@@ -20,6 +20,7 @@ function renderList(users) {
                     break;
                 }
             }
+            //operador ternario en vez de if y else.
             const liClass = isSelect ? "selected" : "";
             const backgroundColor = isSelect ? "pink" : "rgb(148, 201, 241)"
    
@@ -69,7 +70,6 @@ const addFriend = (ev) => {
    /*  for (const friend of bestFriend) {
         console.log(friend.name.first);
     } */
-
     renderList(userList);
     localStorage.setItem("bestFriend", JSON.stringify(bestFriend));
 };
@@ -109,6 +109,8 @@ function handleClick(event) {
 getDataAPI();
 btnsave.addEventListener("click", handleClick);
 btnrecover.addEventListener("click", handleClick);
+
+
 
 
 

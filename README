@@ -1,39 +1,30 @@
-Este proyecto es una aplicación web que permite mostrar una lista de usuarios obtenidos de forma aleatoria a través de una API. A continuación, proporciono una descripción detallada de cada componente y funcionalidad:
+Este proyecto es una aplicación web que permite mostrar una lista de usuarios obtenidos de forma aleatoria a través de una API.
+
+El código realizado crea una aplicación que muestra una lista de usuarios aleatorios, permite al usuario seleccionar a sus amigos y guardarlos localmente. También proporciona la capacidad de guardar y recuperar la lista de usuarios mostrada.
 
 
-1) Componentes Principales:
 
-
--Botón de Guardar (btnsave):
-Este botón permite al usuario guardar la lista de usuarios actualmente mostrados en la página. Al hacer clic en este botón, se ejecuta la función saveDisplayUsers().
-
--Botón de Recuperar (btnrecover):
-Este botón permite al usuario recuperar la lista de usuarios previamente guardados. Al hacer clic en este botón, se ejecuta la función recoverDiplaySaveUsers().
-
--Div (div):
-Este div se utiliza para manipular elementos relacionados con los usuarios, aunque no está claro cómo se utiliza en el código proporcionado.
-
--Lista (ul):
-Esta lista se utiliza para mostrar la información de los usuarios obtenidos de la API. Se actualiza dinámicamente mediante la función renderList(users).
-
-
-2) Funcionalidades Principales:
+1) Funcionalidades Principales:
 
 
 -Obtención de Datos de la API (getDataAPI()):
+
 Esta función hace una solicitud a la API https://randomuser.me/api/?results=10 para obtener datos de usuarios aleatorios. Luego, actualiza la variable userList con los resultados y llama a renderList(userList) para mostrar los usuarios en la página.
 
 -Renderización de la Lista de Usuarios (renderList(users)):
+
 Esta función toma una lista de usuarios como argumento y actualiza dinámicamente la lista en la página HTML. Por cada usuario, genera un elemento li con su información y agrega un evento de clic para seleccionar/deseleccionar como amigo.
 
--Agregar/Eliminar Amigos (toggleFriend(ev)):
+-Agregar/Eliminar Amigos (addFrien(ev)):
+
 Esta función se activa al hacer clic en un usuario de la lista. Permite agregar o eliminar usuarios de la lista de amigos (bestFriend) y actualiza la interfaz de usuario en consecuencia.
 
 -Guardar y Recuperar Usuarios (saveDisplayUsers() y recoverDiplaySaveUsers()):
+
 Estas funciones permiten al usuario guardar y recuperar la lista de usuarios mostrados previamente. Utilizan el almacenamiento local para almacenar y recuperar los datos.
 
 -Manejo de Eventos (handleClick(event)):
+
 Esta función maneja los clics en los botones "Guardar" y "Recuperar". Dependiendo del botón que se haya hecho clic, llama a la función correspondiente.
 
 
-En resumen, este proyecto es una aplicación web que utiliza una API para obtener datos de usuarios aleatorios y proporciona funcionalidades para guardar y recuperar listas de usuarios, así como seleccionar usuarios como amigos.
