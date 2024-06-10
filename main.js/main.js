@@ -4,6 +4,7 @@ const btnsave = document.querySelector(".js_btn-save");
 const btnrecover = document.querySelector(".js_btn-recover");
 const div = document.querySelector(".js_user");
 const ul = document.querySelector(".ulList");
+const select = document.querySelector(".js_select");
 
 let userList = [];
 let bestFriend = [];
@@ -22,7 +23,7 @@ function renderList(users) {
             }
             //operador ternario en vez de if y else.
             const liClass = isSelect ? "selected" : "";
-            const backgroundColor = isSelect ? "pink" : "rgb(148, 201, 241)"
+            const backgroundColor = isSelect ? "pink" : "rgb(8, 60, 100)"
    
             
 
@@ -95,9 +96,19 @@ const recoverDiplaySaveUsers = () => {
     }
 };
 
+const filterByGender = (gender) => {
+    if (gender === "") {
+        renderList(userList);
+    } else {
+        const filteredUsers = userList.filter(user => user.gender === gender);
+        renderList(filteredUsers);
+    }
+};
+
 function handleClick(event) {
     event.preventDefault();
     const btnClicked = event.currentTarget;
+    
 
     if (btnClicked === btnsave) {
         saveDisplayUsers();
@@ -106,10 +117,16 @@ function handleClick(event) {
     }
 }
 
+    function handleSelectChange(event) {
+        const selectedGender = event.target.value;
+        filterByGender(selectedGender);
+    };
+
+
 getDataAPI();
 btnsave.addEventListener("click", handleClick);
 btnrecover.addEventListener("click", handleClick);
-
+select.addEventListener("change",handleSelectChange);
 
 
 
